@@ -1,8 +1,4 @@
-const SquareClass = require('../src/script/TicTacToe.js').Square;
-const BoardClass = require('../src/script/TicTacToe.js').Board;
-const TicTacToeClass = require('../src/script/TicTacToe.js').TicTacToe;
-const Player = require('../src/script/TicTacToe.js').Player;
-
+const {Board, Square, TicTacToe, Player} = require('../src/script/TicTacToe.js');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const dom = new JSDOM('<!doctype html><html><body></body></html>');
@@ -19,12 +15,12 @@ Object.keys(window).forEach((key) => {
 describe("Board.IsFull Testing:", function() {
 
   it("New Empty Board", function() {
-	var board = new BoardClass(3);
+	var board = new Board(3);
     expect(board.isFull()).toBe(false);
   });
   
    it("Full of Empty Symbols", function() {
-	var board = new BoardClass(3);
+	var board = new Board(3);
 	for(var i=0;i<board.squares.length;i++)
 	{
 		board.squares[i].symbol = "   ";
@@ -33,7 +29,7 @@ describe("Board.IsFull Testing:", function() {
   });
   
    it("Full Board", function() {
-     var board = new BoardClass(3);
+     var board = new Board(3);
 	 for(var i=0;i<board.squares.length;i++)
 	 {
 		board.squares[i].symbol = "O";
@@ -44,7 +40,7 @@ describe("Board.IsFull Testing:", function() {
 
 describe("TicTacToe Testing:", function() {
   it("Switching Players", function() {
-	var ttt = new TicTacToeClass(new Player("A","X"),new Player("B","X"));
+	var ttt = new TicTacToe(new Player("A","X"),new Player("B","X"));
 	var testName = ["A","B"];
 	var result=true;
 	

@@ -14,20 +14,20 @@ function TicTacToe(playerOne, playerTwo) {
 	this.currentPlayer = null;
 	this.statusBar = new StatusBar();
 	this.resetButton = new ResetButton();
-	this._initialize();
 };
 TicTacToe.prototype = {
 	constructor: TicTacToe,
 	/**
-	 * Initializer
+	 * render
 	 */
-	_initialize: function(){
+	render: function(parentElement){
 		var ticTacToeDiv = document.createElement("div");
-
+		ticTacToeDiv.width = parentElement.width;
+		ticTacToeDiv.height = parentElement.height;
 		this.statusBar.render(ticTacToeDiv);
 		this.board.render(ticTacToeDiv);
 		this.resetButton.render(ticTacToeDiv, this);
-		document.body.appendChild(ticTacToeDiv);
+		parentElement.appendChild(ticTacToeDiv);
 	},
 	/**
 	 * Start the game
@@ -178,7 +178,7 @@ Board.prototype = {
      */
 	render: function(parentElement)	{
 		var board = document.createElement("div");
-		var size= Math.min(getBrowerHeight(),getBrowserWidth());
+		var size= Math.min(parseInt(parentElement.width,10),parseInt(parentElement.height,10));
 		var size=size/2;
 		var squareWidth=size/this.N;
 		var squareHeight=size/this.N;
@@ -351,32 +351,6 @@ ResetButton.prototype = {
 
 var id = 0;
 var getUniqueID = function() {return id++;}
-
- /**
-  *  Get the width of the broswer
-  */
-function getBrowserWidth() {
-  return Math.max(
-    document.body.scrollWidth,
-    document.documentElement.scrollWidth,
-    document.body.offsetWidth,
-    document.documentElement.offsetWidth,
-    document.documentElement.clientWidth
-  );
-}
-
- /**
-  *  Get the height of the broswer
-  */
-function getBrowerHeight() {
-  return Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.offsetHeight,
-    document.documentElement.clientHeight
-  );
-}
 
 if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
 {
